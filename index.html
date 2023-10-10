@@ -74,7 +74,7 @@
   <script>
     function checkURL(url, elementId, websiteName) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://nebulaflix.000webhostapp.com/check.php?url=' + encodeURIComponent(url), true);
+        xhr.open('GET', 'stat.js?url=' + encodeURIComponent(url), true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.responseText === 'Online') {
