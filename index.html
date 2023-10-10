@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NebulaFlix</title>
+  <style>
+    body {
+      background-color: #323232;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
+    h1 {
+      color: #ffffff;
+      text-shadow: 2px 2px 4px #000;
+      font-size: 24px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a {
+      color: #ebebeb;
+      text-decoration: none;
+      text-shadow: 1px 1px 2px #000;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #00fffb;
+    }
+
+    .online {
+      color: #00ff00;
+    }
+
+    .offline {
+      color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Available Nebula Domains</h1>
+  <ul>
+    <li>
+      <a href="http://nebulaflix.stream" target="_blank" id="status-stream">nebulaflix.stream: Checking...</a>
+    </li>
+    <li>
+      <a href="https://nebulaflix.vercel.app" target="_blank" id="status-vercel">nebulaflix.vercel.app: Checking...</a>
+    </li>
+    <li>
+      <a href="http://nebula.zya.me" target="_blank" id="status-zya">nebula.zya.me: Checking...</a>
+    </li>
+    <li>
+      <a href="http://nebula.x10.mx" target="_blank" id="status-x10">nebula.x10.mx: Checking...</a>
+    </li>
+    <li>
+      <a href="https://nebulaflix.000webhostapp.com" target="_blank" id="status-000">nebulaflix.000webhostapp.com: Checking...</a>
+    </li>
+  </ul>
+
+  <script>
+    function checkURL(url, elementId, websiteName) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://nebulaflix.000webhostapp.com/check.php?url=' + encodeURIComponent(url), true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.responseText === 'Online') {
+                    document.getElementById(elementId).innerHTML = `<a href="${url}" target="_blank">${websiteName} : <span class="online">Online</span>`;
+                } else {
+                    document.getElementById(elementId).innerHTML = `<a href="${url}" target="_blank">${websiteName} : <span class="offline">Offline</span>`;
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    checkURL('http://nebulaflix.stream', 'status-stream', 'nebulaflix.stream');
+    checkURL('https://nebulaflix.vercel.app', 'status-vercel', 'nebulaflix.vercel.app');
+    checkURL('http://nebula.zya.me', 'status-zya', 'nebula.zya.me');
+    checkURL('http://nebula.x10.mx', 'status-x10', 'nebula.x10.mx');
+    checkURL('https://nebulaflix.000webhostapp.com', 'status-000', 'nebulaflix.000webhostapp.com');
+  </script>
+</body>
+</html>
